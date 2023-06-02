@@ -22,8 +22,6 @@ public class Post : AuditEntity
 	[Column(TypeName = "ntext")]
 	public string? Content { get; set; }
 
-	public int CategoryId { get; set; }
-
 	// Navigation Properties
-	public Category Category { get; set; }
+	public List<Category> Categories { get; set; }
 }

@@ -19,8 +19,8 @@ namespace Blog.Web.Mvc.Controllers
         public IActionResult Index(string slug, int page = 1)
         {
             var posts = _db.Posts
-                .Include(p => p.Category)
-                .Where(e => e.Category.Slug == slug)
+                .Include(p => p.Categories)
+                .Where(e => e.Categories.Any(e => e.Slug == slug))
                 .Skip((page - 1) * 10).Take(10)
                 .ToList();
 

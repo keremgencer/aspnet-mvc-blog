@@ -7,9 +7,8 @@ public class Setting
 {
     [Key]
     public int Id { get; set; }
-
-    [Required]
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
+    public User? User { get; set; }
 
     [Column(TypeName = "nvarchar(200)")]
     public string? Name { get; set; }

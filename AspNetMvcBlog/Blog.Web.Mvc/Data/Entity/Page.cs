@@ -9,6 +9,9 @@ public class Page : AuditEntity
 	[Key]
 	public int Id { get; set; }
 
+	[Column(TypeName = "nvarchar(120)")]
+	public string? Slug { get; set; }
+
 	[Required]
 	public string? Title { get; set; }
 

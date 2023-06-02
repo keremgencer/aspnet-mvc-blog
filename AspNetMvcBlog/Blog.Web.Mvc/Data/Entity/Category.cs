@@ -17,4 +17,5 @@ public class Category
 
     [Column(TypeName ="nvarchar(200)")]
     public string? Description { get; set; }
+    public List<Post> Posts { get; set; }
 }

@@ -17,7 +17,7 @@ namespace Blog.Web.Mvc.Controllers
         public IActionResult Search(string query, int page = 1)
         {
             var posts = _db.Posts
-                .Include(p => p.Category)
+                .Include(p => p.Categories)
                 .Where(e => e.Title.Contains(query))
                 .Skip((page - 1) * 10).Take(10)
                 .ToList();
@@ -31,7 +31,7 @@ namespace Blog.Web.Mvc.Controllers
         public IActionResult Detail(int id)
         {
             Post post = _db.Posts
-                .Include(p => p.Category)
+                .Include(p => p.Categories)
                 .Include(p => p.User)
                 .Where(p=> p.Id == id)
                 .FirstOrDefault();
