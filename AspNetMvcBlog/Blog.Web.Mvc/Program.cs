@@ -1,11 +1,12 @@
-using Blog.Web.Mvc.Data;
+using Blog.Business;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppDbContext>();
+
+builder.Services.AddBusinessServices(builder.Configuration);
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o => {
@@ -15,6 +16,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 var app = builder.Build();
+
+/* //BURAYI BUSÝNESS E GEÇÝR
 using (var scope = app.Services.CreateScope())
 {
     // Veritabaný servisine eriþim saðlar.
@@ -26,6 +29,8 @@ using (var scope = app.Services.CreateScope())
 
     DbSeeder.Seed(context);
 }
+*/
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

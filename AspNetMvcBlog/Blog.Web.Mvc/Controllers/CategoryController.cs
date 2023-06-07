@@ -1,4 +1,4 @@
-﻿using Blog.Web.Mvc.Data;
+﻿using Blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

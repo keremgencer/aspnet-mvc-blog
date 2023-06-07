@@ -1,5 +1,5 @@
-﻿using Blog.Web.Mvc.Data;
-using Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Data;
+using Blog.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

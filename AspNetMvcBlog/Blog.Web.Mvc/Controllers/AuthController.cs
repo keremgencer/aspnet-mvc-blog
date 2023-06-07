@@ -1,5 +1,6 @@
-﻿using Blog.Web.Mvc.Data;
-using Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Data.Entity;
+using Blog.Data;
+using Blog.Data.Entity;
 using Blog.Web.Mvc.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;

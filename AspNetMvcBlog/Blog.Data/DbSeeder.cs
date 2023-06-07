@@ -1,6 +1,6 @@
-﻿using Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Data.Entity;
 
-namespace Blog.Web.Mvc.Data
+namespace Blog.Data
 {
 	public class DbSeeder
 	{

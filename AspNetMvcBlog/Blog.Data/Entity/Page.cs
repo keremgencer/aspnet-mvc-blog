@@ -1,8 +1,8 @@
-﻿using Blog.Web.Mvc.Data.Entity.Abstract;
+﻿using Blog.Data.Entity.Abstract;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Web.Mvc.Data.Entity;
+namespace Blog.Data.Entity;
 
 public class Page : AuditEntity
 {
