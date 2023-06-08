@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Blog.Business.Services;
 
 namespace Blog.Web.Mvc.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly AppDbContext _db;
+        private readonly UserService _us;
 
-        public AuthController(AppDbContext db) {
-            _db = db;
+        public AuthController(UserService us) {
+            _us = us;
         }
 
         public IActionResult Register() => View();
@@ -23,9 +24,7 @@ namespace Blog.Web.Mvc.Controllers
         public IActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
-                var user = new User {Name=model.Name, City = model.City, Email = model.Email, Password = model.Password, Phone = model.Phone };
-                _db.Users.Add(user);
-                _db.SaveChanges();
+                _us.Insert(new User { Name = model.Name, Email = model.Email, Password = model.Password, Phone = "", City = "" });
                 return RedirectToAction(nameof(Login));
             }
             else { 
@@ -41,25 +40,12 @@ namespace Blog.Web.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _db.Users.FirstOrDefault(e => e.Email == model.Email && e.Password == model.Password);
+                var user =_us.GetByEmailPassword(model.Email,model.Password);
                 if(user != null)
                 {
-                    var claims = new List<Claim>
-                    {
-                        new Claim("Id",Convert.ToString(user.Id)),
-                        new Claim(ClaimTypes.Name, user.Name),
-                        new Claim(ClaimTypes.Email, user.Email),
-                        new Claim("City",user.City),
-                        new Claim("Password",user.Password),
-                        new Claim(ClaimTypes.MobilePhone, user.Phone)
-                    };
-                    var identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-
-                    var principal = new ClaimsPrincipal(identity);
-
                     var props = new AuthenticationProperties() { ExpiresUtc = DateTime.UtcNow.AddMinutes(60) };
 
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,principal,props);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,_us.ConvertToPrincipal(user),props);
                     return Redirect("/");
                 }
                 else {

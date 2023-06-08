@@ -17,19 +17,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 var app = builder.Build();
 
-/* //BURAYI BUSÝNESS E GEÇÝR
+
 using (var scope = app.Services.CreateScope())
 {
-    // Veritabaný servisine eriþim saðlar.
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    // Veritabanýný sil
-    context.Database.EnsureDeleted();
-    // Veritabanýný oluþturur
-    context.Database.EnsureCreated();
-
-    DbSeeder.Seed(context);
+   ServiceExtensions.EnsureDeletedAndCreated(scope);
 }
-*/
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
