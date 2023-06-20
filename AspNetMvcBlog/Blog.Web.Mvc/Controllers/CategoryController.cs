@@ -1,5 +1,4 @@
 ﻿using Blog.Business.Services;
-using Blog.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

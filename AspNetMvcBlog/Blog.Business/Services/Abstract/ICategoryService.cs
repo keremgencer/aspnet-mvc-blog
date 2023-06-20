@@ -9,10 +9,10 @@ namespace Blog.Business.Services.Abstract
 {
     public interface ICategoryService
     {
-        List<Category> GetAll();
-        Category GetById(int id);
-        void Insert(Category category);
-        void Update(Category category);
+        List<CategoryDto> GetAll();
+        CategoryDto GetById(int id);
+        void Insert(CategoryDto category);
+        void Update(CategoryDto category);
         void DeleteById(int id);
     }
 }

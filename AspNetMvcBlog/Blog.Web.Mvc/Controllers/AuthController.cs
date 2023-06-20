@@ -24,7 +24,7 @@ namespace Blog.Web.Mvc.Controllers
         public IActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
-                _us.Insert(new User { Name = model.Name, Email = model.Email, Password = model.Password, Phone = "", City = "" });
+                _us.Insert(new UserDto { Name = model.Name, Email = model.Email, Password = model.Password, Phone = "", City = "" });
                 return RedirectToAction(nameof(Login));
             }
             else { 
