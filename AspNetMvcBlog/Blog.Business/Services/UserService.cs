@@ -1,6 +1,6 @@
 ﻿using Blog.Business.Services.Abstract;
 using Blog.Data;
-using Blog.Data.Entity;
+using Blog.Business.Dtos;
 using System.Net;
 using System.Security.Claims;
 

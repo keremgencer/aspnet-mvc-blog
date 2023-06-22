@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Data.Entity;
+using Blog.Business.Dtos;
+
 
 public class SettingDto
 {

@@ -1,4 +1,5 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+using Blog.Data.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,10 @@ namespace Blog.Business
         public static List<PostDto> PostListToDtoList(this List<Post> p) { 
         List <PostDto> dtos = new List <PostDto>();
             if(p!= null) { 
-            foreach (var item in p)
-            {
-                dtos.Add(item.PostToDto());
-            }
+                foreach (var item in p)
+                {
+                    dtos.Add(item.PostToDto());
+                }
             }
             return dtos;
         }
@@ -47,7 +48,7 @@ namespace Blog.Business
 
         public static UserDto UserToDto(this User u)
         {
-            return new UserDto { City = u.City, Email = u.Email, Id = u.Id, Name = u.Name, Password = u.Password, Phone = u.Phone };
+            return u != null ? new UserDto { City = u.City, Email = u.Email, Id = u.Id, Name = u.Name, Password = u.Password, Phone = u.Phone } : null ;
         }
 
         public static List<UserDto> UserListToDtoList(this List<User> p)
@@ -69,7 +70,7 @@ namespace Blog.Business
 
         public static CategoryDto CategoryToDto(this Category c)
         {
-            return new CategoryDto { Description = c.Description, Name = c.Name , Id = c.Id, Posts = c.Posts.PostListToDtoList() , Slug = c.Slug};
+            return new CategoryDto { Description = c.Description, Name = c.Name , Id = c.Id, /*Posts = c.Posts.PostListToDtoList() , */Slug = c.Slug};
         }
 
         public static List<CategoryDto> CategoryListToDtoList(this List<Category> p)

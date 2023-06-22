@@ -1,6 +1,6 @@
 ﻿using Azure;
 using Blog.Data;
-using Blog.Data.Entity;
+using Blog.Business.Dtos;
 using Microsoft.EntityFrameworkCore;
 using Blog.Business.Services.Abstract;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -19,8 +19,8 @@ namespace Blog.Business.Services
 
         public List<PostDto> GetAll()
         {
-            return _db.Posts.Include(p => p.Categories).Include(p => p.User).ToList().PostListToDtoList();
-                
+            var a = _db.Posts.Include(p => p.Categories).Include(p => p.User).ToList().PostListToDtoList();
+            return a;
         }
 
         public PostDto GetById(int id)

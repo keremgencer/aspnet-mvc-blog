@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Blog.Data.Entity;
+namespace Blog.Business.Dtos;
+
 
 public class PageDto : AuditEntity
 {

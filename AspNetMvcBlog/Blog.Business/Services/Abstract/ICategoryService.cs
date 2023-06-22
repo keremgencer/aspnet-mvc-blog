@@ -1,4 +1,4 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

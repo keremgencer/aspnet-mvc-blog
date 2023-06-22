@@ -1,4 +1,5 @@
-﻿using Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+
 
 namespace Blog.Business.Services.Abstract
 {

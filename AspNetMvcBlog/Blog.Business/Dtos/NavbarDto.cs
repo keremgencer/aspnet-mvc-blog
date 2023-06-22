@@ -1,4 +1,5 @@
-﻿namespace Blog.Data.Entity;
+﻿using Blog.Business.Dtos;
+
 
 public class NavbarDto
 {

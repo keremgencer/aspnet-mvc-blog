@@ -1,6 +1,7 @@
 ﻿using Blog.Business.Services.Abstract;
 using Blog.Data;
-using Blog.Data.Entity;
+using Blog.Business.Dtos;
+
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
