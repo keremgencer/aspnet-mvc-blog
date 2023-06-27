@@ -22,7 +22,7 @@ namespace Blog.Business
                 o.UseSqlServer(connectionString);
             });
             services.AddTransient<PostService>();
-            services.AddTransient<CategoryService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<PageService>();
             services.AddTransient<SettingService>();
             services.AddTransient<UserService>();

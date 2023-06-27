@@ -48,7 +48,7 @@ namespace Blog.Business
 
         public static UserDto UserToDto(this User u)
         {
-            return u != null ? new UserDto { City = u.City, Email = u.Email, Id = u.Id, Name = u.Name, Password = u.Password, Phone = u.Phone } : null ;
+            return u != null ? new UserDto { City = u.City, Email = u.Email, Id = u.Id, Name = u.Name, Password = u.Password, Phone = u.Phone ,Roles = u.Roles} : null ;
         }
 
         public static List<UserDto> UserListToDtoList(this List<User> p)

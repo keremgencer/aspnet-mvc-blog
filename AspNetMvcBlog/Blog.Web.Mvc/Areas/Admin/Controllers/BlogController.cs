@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Blog.Web.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BlogController : Controller
+	[Authorize(Roles = "Admin")]
+
+	public class BlogController : Controller
     {
         public IActionResult Index()
         {

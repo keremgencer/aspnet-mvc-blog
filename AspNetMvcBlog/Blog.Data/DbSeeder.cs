@@ -22,7 +22,10 @@ namespace Blog.Data
 			}
             if (!context.Users.Any())
             {
-                context.Users.Add(new User { Name = "Admin" ,Email="admin@gmail.com",Password="admin",Phone="05366666666", City="Ankara"});
+                context.Users.Add(new User { Name = "Admin" ,Email="admin@gmail.com",Password="admin",Phone="05366666666", City="Ankara", Roles ="Admin,"});
+                context.Users.Add(new User { Name = "Kerem" ,Email="kerem@gmail.com",Password="kerem",Phone="06366666666", City="Bolu",});
+
+
                 context.SaveChanges();
             }
             if (!context.Posts.Any())
