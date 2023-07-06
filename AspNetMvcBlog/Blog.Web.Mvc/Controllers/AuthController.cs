@@ -1,5 +1,6 @@
 ﻿using Blog.Business.Dtos;
 using Blog.Business.Services;
+using Blog.Business.Services.Abstract;
 using Blog.Web.Mvc.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,9 +11,9 @@ namespace Blog.Web.Mvc.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly UserService _us;
+        private readonly IUserService _us;
 
-        public AuthController(UserService us) {
+        public AuthController(IUserService us) {
             _us = us;
         }
 

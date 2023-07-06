@@ -67,7 +67,10 @@
 									@Context.User.Identity.Name
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-
+									@if (Context.User.IsInRole("Admin"))
+									{
+										<a class="dropdown-item" asp asp-area="admin">Admin Page</a>
+									}
 									<a class="dropdown-item" asp-controller="Auth" asp-action="logout">Logout</a>
 									
 								</div>
