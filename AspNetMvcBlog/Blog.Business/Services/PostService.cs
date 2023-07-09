@@ -35,7 +35,9 @@ namespace Blog.Business.Services
 
         public void Insert(PostDto post)
         {
-            _db.Posts.Add(post.DtoToPost());
+            var postEntity = post.DtoToPost();
+            _db.Posts.Add(postEntity);
+
             _db.SaveChanges();
         }
         /*
@@ -73,7 +75,7 @@ namespace Blog.Business.Services
                 existingPost.Content = dto.Content;
                 existingPost.Title = dto.Title;
                 existingPost.UpdatedAt = DateTime.Now;
-
+                existingPost.UserId = dto.UserId;
                 if (dto.Categories != null)
                 {
                     // Ensure the Categories collection is instantiated

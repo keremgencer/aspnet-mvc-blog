@@ -22,6 +22,7 @@ namespace Blog.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Post>().HasMany(p => p.Categories).WithMany(p => p.Posts);
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Blog.Business
 {
@@ -20,12 +21,19 @@ namespace Blog.Business
             {
                 string connectionString = configuration.GetConnectionString("Default");
                 o.UseSqlServer(connectionString);
+                //o.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
             services.AddTransient<PostService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<PageService>();
             services.AddTransient<SettingService>();
             services.AddTransient<IUserService, UserService>();
+            //services.AddScoped<PostService>();
+            //services.AddScoped<ICategoryService, CategoryService>();
+            //services.AddScoped<PageService>();
+            //services.AddScoped<SettingService>();
+            //services.AddScoped<IUserService, UserService>();
+
             return services;
         }
         public static void EnsureDeletedAndCreated(IServiceScope scope)

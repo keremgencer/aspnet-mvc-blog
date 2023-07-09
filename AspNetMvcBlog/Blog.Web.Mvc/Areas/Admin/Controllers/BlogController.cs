@@ -3,20 +3,22 @@ using Blog.Business.Services;
 using Blog.Business.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 
 namespace Blog.Web.Mvc.Areas.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
 
-	public class BlogController : Controller
+    public class BlogController : Controller
     {
         private readonly PostService _postService;
         private readonly ICategoryService _categoryService;
         private readonly IUserService _userService;
-        public BlogController(PostService ps, ICategoryService cs,IUserService us)
+        public BlogController(PostService ps, ICategoryService cs, IUserService us)
         {
             _postService = ps;
             _categoryService = cs;
@@ -31,7 +33,7 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
         {
             return View(_postService.GetById(id));
         }
-        
+
 
         public IActionResult Delete(int id)
         {
@@ -65,8 +67,11 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
             {
                 cs.Add(_categoryService.GetById(Convert.ToInt32(category)));
             }
+
             dto.Categories = cs;
+
             _postService.Update(id, dto);
+
             return RedirectToAction(nameof(Index));
 
         }
@@ -74,19 +79,33 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
         public IActionResult Create()
         {
             ViewBag.categories = _categoryService.GetAll();
+
             return View();
         }
+
         [HttpPost]
-        public IActionResult Create(PostDto p,List<string> categories)
+        public IActionResult Create(PostDto p, List<string> categories)
         {
             p.UserId = 1;
-            ModelState.Remove(p.User); // sonra hallet
+            p.User = _userService.GetById(1);
+
+            var cs = new List<CategoryDto>();
+
+            foreach (var category in categories)
+            {
+                cs.Add(_categoryService.GetById(Convert.ToInt32(category)));
+            }
+            p.Categories = cs;
+
+            //ModelState.Remove("User");
+
             if (ModelState.IsValid)
             {
-                _postService.Insert(p);   
+                _postService.Insert(p);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
+
             ViewBag.categories = _categoryService.GetAll();
             return View(p);
         }

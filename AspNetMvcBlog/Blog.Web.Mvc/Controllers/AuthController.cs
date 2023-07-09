@@ -45,10 +45,12 @@ namespace Blog.Web.Mvc.Controllers
                 var user =_us.GetByEmailPassword(model.Email,model.Password);
                 if(user != null)
                 {
-                    var props = new AuthenticationProperties() { ExpiresUtc = DateTime.UtcNow.AddMinutes(60) };
+                    var props = new AuthenticationProperties() { /*ExpiresUtc = DateTime.UtcNow.AddMinutes(60),*/
+                        IsPersistent = true
+                    };
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,_us.ConvertToPrincipal(user),props);
-                    if (!user.Roles.IsNullOrEmpty() && user.Roles.Contains("Admin")) return Redirect("/Admin/home");
+                    if (!user.Roles.IsNullOrEmpty() && user.Roles.Contains("Admin")) return Redirect("/Admin/Home");
                     return Redirect("/");
                 }
                 else {
