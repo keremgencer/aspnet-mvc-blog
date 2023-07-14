@@ -20,22 +20,32 @@ namespace Blog.Business.Services
 
         public IEnumerable<PostDto> GetAll()
         {
-            var a = _db.Posts.Include(p => p.Categories).Include(p => p.User).ToList().PostListToDtoList();
+            var a = _db.Posts
+                .Include(p => p.Categories)
+                .Include(p => p.User)
+                .ToList()
+                .PostListToDtoList();
+
             return a;
         }
 
         public PostDto GetById(int id)
         {
-            return _db.Posts
+            var post = _db.Posts
                 .Include(p => p.Categories)
                 .Include(p => p.User)
+                .Include(p => p.PostImages)
                 .Where(p => p.Id == id)
                 .FirstOrDefault().PostToDto();
+            return post;
         }
 
         public void Insert(PostDto post)
         {
             var postEntity = post.DtoToPost();
+            var dtoCategoryList = post.CategoryDtos.Select(e => e.Id);
+            postEntity.Categories = _db.Categories.Where(c => dtoCategoryList.Contains(c.Id)).ToList();
+
             _db.Posts.Add(postEntity);
 
             _db.SaveChanges();
@@ -76,8 +86,9 @@ namespace Blog.Business.Services
                 existingPost.Title = dto.Title;
                 existingPost.UpdatedAt = DateTime.Now;
                 existingPost.UserId = dto.UserId;
-                if (dto.Categories != null)
+                if (dto.CategoryDtos != null)
                 {
+                    /*
                     // Ensure the Categories collection is instantiated
                     if (existingPost.Categories == null)
                     {
@@ -87,8 +98,8 @@ namespace Blog.Business.Services
                     {
                         existingPost.Categories.Clear(); // Clear existing categories
                     }
-
-                    foreach (var categoryDto in dto.Categories)
+                    */
+                    foreach (var categoryDto in dto.CategoryDtos)
                     {
                         var category = _db.Categories.FirstOrDefault(c => c.Id == categoryDto.Id);
 

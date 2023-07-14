@@ -14,6 +14,8 @@ namespace Blog.Data
         public DbSet<Setting>  Settings { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Departman> Departman { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -21,7 +23,9 @@ namespace Blog.Data
         //many to many, N - N Relationship
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>().HasMany(p => p.Categories).WithMany(p => p.Posts);
+            modelBuilder.Entity<Post>()
+                .HasMany(p => p.Categories)
+                .WithMany(p => p.Posts);
 
             base.OnModelCreating(modelBuilder);
         }

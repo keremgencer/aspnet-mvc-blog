@@ -24,8 +24,8 @@
                                 <div class="post-thumb mb-4">
                                     <img src="/images/news/f1.jpg" alt="" class="img-fluid w-100">
                                 </div>
-                                @if(post.Categories != null){
-                                    @foreach(CategoryDto c in post.Categories){
+                                @if(post.CategoryDtos != null){
+                                    @foreach(CategoryDto c in post.CategoryDtos){
                                     <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@c.Name</span>
                                     }
                                 }

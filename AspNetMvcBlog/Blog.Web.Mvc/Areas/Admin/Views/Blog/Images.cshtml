@@ -1,0 +1,30 @@
+﻿@model PostDto
+<div class="d-flex justify-content-around">
+<h1>@Model.Title</h1>
+<h2>@Model.User.Name</h2>
+<h3>@Model.CreatedAt</h3>
+
+<div>
+@foreach (CategoryDto c in Model.CategoryDtos)
+{
+    <h4>@c.Name</h4>
+
+}
+    </div>
+</div>
+@foreach (var i in Model.PostImageDtos)
+{
+    <text>@i.ImagePath</text>
+
+}
+
+<form asp-action="Images" method="post">
+    <input type="file"/>
+    <div class="d-flex">
+        <button type="submit" class="btn btn-primary">Add new</button>
+        <a asp-action="Index" class="btn btn-secondary">Go Back</a>
+    </div>
+</form>
+
+
+

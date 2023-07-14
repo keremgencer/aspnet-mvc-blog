@@ -13,6 +13,7 @@
             <th scope="col">content</th>
             <th scope="col">Categories</th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -23,12 +24,17 @@
             <td>@i.Title</td>
             <td>@i.Content</td>
             <td>
-                    @foreach(CategoryDto c in i.Categories)
+                    @foreach(CategoryDto c in i.CategoryDtos)
                     {
                         <text>@c.Name </text>
                     }
             </td>
-                
+                <td>
+
+                    <a asp-controller="Blog" asp-action="Images" asp-route-id="@i.Id">Images</a> |
+                    <a asp-controller="blog" asp-action="Comments" asp-route-id="@i.Id">Comments</a> |
+
+                </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@i.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@i.Id">Details</a> |

@@ -25,5 +25,6 @@ public class PostDto : AuditEntity
 	public string? Content { get; set; }
 
 	// Navigation Properties
-	public List<CategoryDto>? Categories { get; set; }
+	public List<CategoryDto>? CategoryDtos { get; set; }
+	public List<PostImageDto> PostImageDtos { get; set;}
 }

@@ -54,7 +54,16 @@ namespace Blog.Data
                 context.Pages.AddRange(pages);
                 context.SaveChanges();
             }
+			if (!context.PostImages.Any())
+			{
+				var images = new PostImage[]
+				{
+					new PostImage{ PostId = 1, ImagePath="deneme"},
+				};
 
+                context.PostImages.AddRange(images);
+                context.SaveChanges();
+            }
         }
 	}
 }

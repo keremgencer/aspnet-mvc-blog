@@ -6,8 +6,9 @@ namespace Blog.Data.Entity;
 
 public class Post : AuditEntity
 {
-	[Key]
-	public int Id { get; set; }
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
 	
 	public int UserId { get; set; }
@@ -24,4 +25,5 @@ public class Post : AuditEntity
 
 	// Navigation Properties
 	public List<Category>? Categories { get; set; }
+	public List<PostImage>? PostImages { get; set; }
 }

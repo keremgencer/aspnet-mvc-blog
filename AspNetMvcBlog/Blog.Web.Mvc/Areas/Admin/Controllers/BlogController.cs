@@ -51,7 +51,7 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
             var post = _postService.GetById(id);
             if (post != null)
             {
-                ViewBag.categories = _categoryService.GetAll();
+                ViewBag.categories = _categoryService.GetAll().ToList();
 
                 return View(post);
             }
@@ -68,7 +68,7 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
                 cs.Add(_categoryService.GetById(Convert.ToInt32(category)));
             }
 
-            dto.Categories = cs;
+            dto.CategoryDtos = cs;
 
             _postService.Update(id, dto);
 
@@ -95,7 +95,7 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
             {
                 cs.Add(_categoryService.GetById(Convert.ToInt32(category)));
             }
-            p.Categories = cs;
+            p.CategoryDtos = cs;
 
             //ModelState.Remove("User");
 
@@ -108,6 +108,11 @@ namespace Blog.Web.Mvc.Areas.Admin.Controllers
 
             ViewBag.categories = _categoryService.GetAll();
             return View(p);
+        }
+
+        public IActionResult Images(int id)
+        {
+            return View(_postService.GetById(id));
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Blog.Business
 {
@@ -16,7 +17,7 @@ namespace Blog.Business
 
         public static PostDto PostToDto(this Post p)
         {
-            return new PostDto { Id = p.Id, Categories = p.Categories.CategoryListToDtoList(), Content = p.Content, CreatedAt = p.CreatedAt, DeletedAt = p.DeletedAt, Title = p.Title, UpdatedAt = p.UpdatedAt, UserId = p.UserId, User = p.User.UserToDto() };
+            return new PostDto { Id = p.Id, CategoryDtos = p.Categories.CategoryListToDtoList(), Content = p.Content, CreatedAt = p.CreatedAt, DeletedAt = p.DeletedAt, Title = p.Title, UpdatedAt = p.UpdatedAt, UserId = p.UserId, User = p.User.UserToDto(), PostImageDtos = p.PostImages.PostImageListToDtoList() };
         }
 
         public static List<PostDto> PostListToDtoList(this List<Post> p)
@@ -33,7 +34,7 @@ namespace Blog.Business
         }
         public static Post DtoToPost(this PostDto p)
         {
-            var categories = p.Categories.DtoListToCategoryList();
+            //var categories = p.Categories.DtoListToCategoryList();
 
             var postEntity = new Post
             {
@@ -44,7 +45,7 @@ namespace Blog.Business
                 DeletedAt = p.DeletedAt,
                 UpdatedAt = p.UpdatedAt,
                 UserId = p.UserId,
-                Categories = categories,
+                //Categories = categories,
             };
 
             return postEntity;
@@ -92,7 +93,7 @@ namespace Blog.Business
 
         public static CategoryDto CategoryToDto(this Category c)
         {
-            return new CategoryDto { Description = c.Description, Name = c.Name, Id = c.Id, /*Posts = c.Posts.PostListToDtoList() , */Slug = c.Slug };
+            return new CategoryDto { Description = c.Description, Name = c.Name, Id = c.Id, /*Posts = c.Posts.PostListToDtoList(),*/ Slug = c.Slug };
         }
 
         public static List<CategoryDto> CategoryListToDtoList(this List<Category> p)
@@ -112,9 +113,9 @@ namespace Blog.Business
                 Description = c.Description,
                 Name = c.Name,
                 Id = c.Id,
-                Slug = c.Slug
+                Slug = c.Slug,
+            /*Posts = c.Posts.DtoListToPostList()*/
             };
-            /*Posts = c.Posts.DtoListToPostList(),*/
         }
 
         public static List<Category> DtoListToCategoryList(this List<CategoryDto> p)
@@ -170,6 +171,26 @@ namespace Blog.Business
         {
             return new Setting { Id = s.Id, Name = s.Name, UserId = s.UserId, Value = s.Value };
 
+        }
+
+        //Images
+
+        public static List<PostImageDto> PostImageListToDtoList(this List<PostImage> images)
+        {
+            if (images == null) return null;
+            List<PostImageDto> postImages = new List<PostImageDto>();
+            foreach (var i in images) {
+                postImages.Add(PostImageToDto(i));
+            
+            }
+            return postImages;
+        }
+
+        public static PostImageDto PostImageToDto(this PostImage i)
+        {
+            if (i == null) return null;
+            PostImageDto postImage = new PostImageDto { Id = i.Id, ImagePath = i.ImagePath, PostId = i.PostId };
+            return postImage;
         }
     }
 }
